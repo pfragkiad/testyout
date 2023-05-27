@@ -18,6 +18,17 @@ def get_playlist_duration(playlist):
         total_duration+= get_video_duration(url)
     return total_duration
 
+def get_video_count(playlist_url):
+    ydl_opts = {
+        'dump_single_json': True,
+        'extract_flat': 'in_playlist',
+        'playlist_items': '1-',
+        'skip_download': True,
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        info = ydl.extract_info(playlist_url, download=False)
+        return len(info['entries'])
+
 def get_video_urls(playlist_url):
     ydl_opts = {
         'dump_single_json': True,
