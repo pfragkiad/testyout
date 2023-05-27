@@ -16,16 +16,10 @@ for playlist in playlists:
     print("Processing playlist {}...".format(i) )
     durations[i] = yt_ext.get_playlist_duration(playlist)
 
-for i in range(4,7):
+for i in range(6,7):
     (d,h,m,s) = yt_ext.seconds_to_dhms(durations[i])
-    if d > 0:
-        print('Playlist #{}: {:02d}d {:02d}h {:02d}m {:02d}s'.format(i,d, h, m, s))
-    elif h > 0:
-        print('Playlist #{}: {:02d}h {:02d}m {:02d}s'.format(i,h, m, s))
-    elif m > 0:
-        print('Playlist #{}: {:02d}m {:02d}s'.format(i,m, s))
-    elif s > 0:
-        print('Playlist #{}: {:02d}s'.format(i,s))
+    text_duration= yt_ext.dhms_to_string((d,h,m,s))
+    print('Playlist #{} {}:'.format(i,text_duration))
 
 import AppKit
 AppKit.NSBeep()
