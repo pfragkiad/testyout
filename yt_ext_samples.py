@@ -9,12 +9,11 @@ def show_comp_playlists():
     }
 
     playlists = {}
-    for key,name in playlist_names:
+    for key,name in playlist_names.items():
         playlists[key] = yt_ext.Playlist(name, populate_now=True);
         print(f"Processing playlist {key}...")
 
-    for key,p in playlists:
-
+    for key,p in playlists.items():
         (d,h,m,s) = yt_ext.seconds_to_dhms(p.total_duration_seconds)
         text_duration= yt_ext.dhms_to_string((d,h,m,s))
         print(f'Playlist #{key}: Videos: {p.videos_count}, Duration: {text_duration}')

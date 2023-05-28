@@ -3,4 +3,5 @@
 *.part
 *.mkv
 *.ytdl
+sample_data.txt
 .gitignore
