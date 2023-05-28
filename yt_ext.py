@@ -81,6 +81,10 @@ def get_video_count(playlist_url):
         info = ydl.extract_info(playlist_url, download=False)
         return len(info['entries'])
 
+def build_playlist_url(playlist_name):
+    baseurl = "https://www.youtube.com/playlist?list="
+    return f'{baseurl}{playlist_name}'
+
 def get_video_urls(playlist_url):
     ydl_opts = {
         'dump_single_json': True,
@@ -111,3 +115,4 @@ def dhms_to_string(dhms):
         return '{:02d}m {:02d}s'.format(m, s)
     elif s > 0:
         return '{:02d}s'.format(s)
+
