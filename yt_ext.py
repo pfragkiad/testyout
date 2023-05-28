@@ -17,10 +17,13 @@ class PlaylistVideo:
         return f'{self.title} ({self.id})'
 
 class Playlist:
-    def __init__(self, name, populate_now = False):
-        self.name = name
+    def __init__(self, id, populate_now = False):
+        self.id = id
         if populate_now:
             self.update_info()
+
+    def __str__(self):
+        return f'{self.title} ({self.id})'
     
     def update_info(self):
         ydl_opts = {
@@ -30,7 +33,7 @@ class Playlist:
             'skip_download': True,
         }
         baseurl = "https://www.youtube.com/playlist?list="
-        url = f'{baseurl}{self.name}'
+        url = f'{baseurl}{self.id}'
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             self.info = ydl.extract_info(url, download=False)
         
