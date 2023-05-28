@@ -1,28 +1,57 @@
-from yt_dlp import YoutubeDL
 import yt_dlp
+
+#hint code here: https://github.com/yt-dlp/yt-dlp#embedding-yt-dlp
+
+import threading
+
+class Video:
+    def __init__(self,name):
+        self.name = name
+    def __str__(self):
+        return f'{self.name}'
 
 class Playlist:
     def __init__(self, name,populate_now = False):
         self.name = name
         if populate_now:
-            self.populate()
+            self.update_video_urls()
 
     def get_url(self):
         baseurl = "https://www.youtube.com/playlist?list="
         return f'{baseurl}{self.name}'
 
-    def populate(self):
+    def update_video_urls(self, get_durations = True):
         url = self.get_url()
         self.videos = get_video_urls(url)
         self.videos_count = len(self.videos)
-        #self.total_duration_seconds = get_playlist_duration(url)
-        self.total_duration_seconds = sum(get_video_duration(v) for v in self.videos)
+        #or: self.total_duration_seconds = get_playlist_duration(url)
+        if get_durations:
+            self.total_duration_seconds = sum(get_video_duration(v) for v in self.videos)
+
+    def download(self):
+        threads=[]
+        for url in self.videos:
+            t = threading.Thread(target=download_video,args=(url,))
+            t.start()
+            threads.append(t)
+
+        for t in threads:
+            t.join()
+
+        # for url in self.videos:
+        #     with yt_dlp.YoutubeDL() as ydl:
+        #         ydl.download(url)
 
     #The method should be called after a call to the populate method.
     def show_info(self):
         (d,h,m,s) = seconds_to_dhms(self.total_duration_seconds)
         text_duration= dhms_to_string((d,h,m,s))
         print(f'Videos: {self.videos_count}, Duration: {text_duration}')
+
+
+def download_video(url):
+    with yt_dlp.YoutubeDL() as ydl:
+        ydl.download(url)
 
 # Retrieves the video duration in seconds.
 def get_video_duration(url):
@@ -82,6 +111,3 @@ def dhms_to_string(dhms):
         return '{:02d}m {:02d}s'.format(m, s)
     elif s > 0:
         return '{:02d}s'.format(s)
-
-
-#samples area

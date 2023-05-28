@@ -1,1 +1,6 @@
 /__pycache__
+*.webm
+*.part
+*.mkv
+*.ytdl
+.gitignore
