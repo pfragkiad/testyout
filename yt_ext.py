@@ -2,8 +2,10 @@ from yt_dlp import YoutubeDL
 import yt_dlp
 
 class Playlist:
-    def __init__(self, name):
+    def __init__(self, name,populate_now = False):
         self.name = name
+        if populate_now:
+            self.populate()
 
     def get_url(self):
         baseurl = "https://www.youtube.com/playlist?list="
@@ -15,6 +17,12 @@ class Playlist:
         self.videos_count = len(self.videos)
         #self.total_duration_seconds = get_playlist_duration(url)
         self.total_duration_seconds = sum(get_video_duration(v) for v in self.videos)
+
+    #The method should be called after a call to the populate method.
+    def show_info(self):
+        (d,h,m,s) = seconds_to_dhms(self.total_duration_seconds)
+        text_duration= dhms_to_string((d,h,m,s))
+        print(f'Videos: {self.videos_count}, Duration: {text_duration}')
 
 # Retrieves the video duration in seconds.
 def get_video_duration(url):

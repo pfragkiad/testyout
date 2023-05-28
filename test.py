@@ -14,20 +14,17 @@ def show_comp_playlists():
 
     playlists = {}
     for key,name in playlist_names:
-        playlists[key] = yt_ext.Playlist(name);
-        playlists[key].populate()
+        playlists[key] = yt_ext.Playlist(name, populate_now=True);
         print(f"Processing playlist {key}...")
 
     for key,p in playlists:
+
         (d,h,m,s) = yt_ext.seconds_to_dhms(p.total_duration_seconds)
         text_duration= yt_ext.dhms_to_string((d,h,m,s))
         print(f'Playlist #{key}: Videos: {p.videos_count}, Duration: {text_duration}')
 
-p = yt_ext.Playlist('PLm7BxCUdWqZzjZ-jRe73KUfj2GsSS2FPy')
-p.populate()
-(d,h,m,s) = yt_ext.seconds_to_dhms(p.total_duration_seconds)
-text_duration= yt_ext.dhms_to_string((d,h,m,s))
-print(f'Videos: {p.videos_count}, Duration: {text_duration}')
+p = yt_ext.Playlist('PLm7BxCUdWqZzjZ-jRe73KUfj2GsSS2FPy', populate_now=True)
+p.show_info()
 
 import AppKit
 AppKit.NSBeep()
