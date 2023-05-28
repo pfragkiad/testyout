@@ -1,6 +1,21 @@
 from yt_dlp import YoutubeDL
 import yt_dlp
 
+class Playlist:
+    def __init__(self, name):
+        self.name = name
+
+    def get_url(self):
+        baseurl = "https://www.youtube.com/playlist?list="
+        return f'{baseurl}{self.name}'
+
+    def populate(self):
+        url = self.get_url()
+        self.videos = get_video_urls(url)
+        self.videos_count = len(self.videos)
+        #self.total_duration_seconds = get_playlist_duration(url)
+        self.total_duration_seconds = sum(get_video_duration(v) for v in self.videos)
+
 # Retrieves the video duration in seconds.
 def get_video_duration(url):
     ydl_opts = {}
@@ -11,8 +26,8 @@ def get_video_duration(url):
         return duration
     
 # Retrieves the playlist duration in seconds.
-def get_playlist_duration(playlist):
-    video_urls = get_video_urls(playlist)
+def get_playlist_duration(playlist_url):
+    video_urls = get_video_urls(playlist_url)
     total_duration = 0 
     for url in video_urls:
         total_duration+= get_video_duration(url)
