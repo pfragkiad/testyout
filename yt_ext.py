@@ -48,6 +48,9 @@ class Playlist:
         self.videos_count = self.info["playlist_count"]
         self.videos = list(map(lambda e : PlaylistVideo(e),self.info['entries']))
         self.total_duration_seconds = sum(v.duration_seconds for v in self.videos)
+    
+    def get_partial_duration(self,from_index):
+        return sum(v.duration_seconds for v in self.videos[from_index-1:])
 
 
     # def get_url(self):
