@@ -34,7 +34,7 @@ import yt_ext_samples
 
 p4 = "PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj"
 p = yt_ext.Playlist(p4,True)
-duration = p.get_partial_duration(71)
+duration = p.get_partial_duration(83,103)
 text_duration= yt_ext.seconds_to_dhms_string(duration)
 print(f'Playlist #{p4}: Duration: {text_duration}')
 
