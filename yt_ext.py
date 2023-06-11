@@ -50,7 +50,7 @@ class Playlist:
         self.total_duration_seconds = sum(v.duration_seconds for v in self.videos)
     
     #from_index are 1-based
-    def get_partial_duration(self,from_index, to_index):
+    def get_partial_duration(self,from_index, to_index = None):
         if from_index is not None:
             if to_index is not None:
                 return sum(v.duration_seconds for v in self.videos[from_index-1:to_index])

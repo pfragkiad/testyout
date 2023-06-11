@@ -32,10 +32,22 @@ import yt_ext_samples
 #print("Downloading...")
 #p_arch.download()
 
-p4 = "PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj"
+playlists = {
+    "p3":"PLAwxTw4SYaPnhRXZ6wuHnnclMLfg_yjHs", #3
+    "p4":"PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj", #4
+    "p5":"PLAwxTw4SYaPkr-vo9gKBTid_BWpWEfuXe", #5
+    "p6":"PLAwxTw4SYaPndXEsI4kAa6BDSTRbkCKJN" #6
+}
+
+p4 = playlists["p4"]
 p = yt_ext.Playlist(p4,True)
-duration = p.get_partial_duration(83,103)
+duration = p.get_partial_duration(94,103)
 text_duration= yt_ext.seconds_to_dhms_string(duration)
 print(f'Playlist #{p4}: Duration: {text_duration}')
 
+p5 = playlists["p5"]
+p = yt_ext.Playlist(p5,True)
+duration = p.get_partial_duration(48)
+text_duration= yt_ext.seconds_to_dhms_string(duration)
+print(f'Playlist #{p5}: Duration: {text_duration}')
     
