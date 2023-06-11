@@ -143,6 +143,10 @@ def seconds_to_dhms(seconds):
     s = seconds % 3600 % 60
     return (d,h,m,s)
 
+def seconds_to_dhms_string(seconds):
+    dhms = seconds_to_dhms(seconds)
+    return dhms_to_string(dhms)
+
 def dhms_to_string(dhms):
     (d,h,m,s) = dhms
     if d > 0:
