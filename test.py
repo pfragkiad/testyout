@@ -39,15 +39,18 @@ playlists = {
     "p6":"PLAwxTw4SYaPndXEsI4kAa6BDSTRbkCKJN" #6
 }
 
-p4 = playlists["p4"]
-p = yt_ext.Playlist(p4,True)
-duration = p.get_partial_duration(94,103)
-text_duration= yt_ext.seconds_to_dhms_string(duration)
-print(f'Playlist #{p4}: Duration: {text_duration}')
+# p4 = playlists["p4"]
+# p = yt_ext.Playlist(p4,True)
+# duration = p.get_partial_duration(94,103)
+# text_duration= yt_ext.seconds_to_dhms_string(duration)
 
 p5 = playlists["p5"]
 p = yt_ext.Playlist(p5,True)
-duration = p.get_partial_duration(48)
-text_duration= yt_ext.seconds_to_dhms_string(duration)
-print(f'Playlist #{p5}: Duration: {text_duration}')
+duration = p.get_partial_duration(76)
+text_duration2= yt_ext.seconds_to_dhms_string(duration)
+
+#print(f'Playlist #{p4}: Duration: {text_duration}')
+print(f'Playlist #{p5}: Duration: {text_duration2}')
+
+p.show_info()
     

@@ -4,6 +4,24 @@ import yt_dlp
 
 import threading
 
+class YtLogger:
+    def debug(self, msg):
+        # For compatibility with youtube-dl, both debug and info are passed into debug
+        # You can distinguish them by the prefix '[debug] '
+        if msg.startswith('[debug] '):
+            pass
+        else:
+            self.info(msg)
+
+    def info(self, msg):
+        pass
+
+    def warning(self, msg):
+        pass
+
+    def error(self, msg):
+        print(msg)
+
 class PlaylistVideo:
     def __init__(self, entry):
         self.id = entry["id"]
@@ -24,13 +42,18 @@ class Playlist:
 
     def __str__(self):
         return f'{self.title} ({self.id})'
-    
+
+    # def my_hook(self,d):
+    #     if d['status'] == 'finished':
+    #         print('Done downloading!!! Post proc now ...')
+
     def update_info(self):
         ydl_opts = {
             'dump_single_json': True,
             'extract_flat': 'in_playlist',
             'playlist_items': '1-',
             'skip_download': True,
+            #'progress_hooks': [self.my_hook]
         }
         baseurl = "https://www.youtube.com/playlist?list="
         url = f'{baseurl}{self.id}'
